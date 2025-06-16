@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แดชบอร์ด - ระบบเลือกตั้งออนไลน์</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>ระบบเลือกตั้งออนไลน์</h1>
+        <nav>
+            <a href="./results.html">ผลการเลือกตั้ง</a>
+            <button id="logoutBtn">ออกจากระบบ</button>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>แดชบอร์ดผู้ใช้</h2>
+        <p id="welcomeMessage"></p>
+        
+        <div id="votingSection">
+            <h3>เลือกผู้สมัคร</h3>
+            <div class="candidates" id="candidatesList">
+                <!-- ผู้สมัครจะถูกโหลดโดย JavaScript -->
+            </div>
+        </div>
+        
+        <div id="votingClosed">
+            <p>การลงคะแนนยังไม่เปิดหรือปิดแล้ว</p>
+        </div>
+    </main>
+    
+    <script src="./assets/js/supabase.js" type="module"></script>
+    <script src="./assets/js/vote.js" type="module"></script>
+</body>
+</html>
