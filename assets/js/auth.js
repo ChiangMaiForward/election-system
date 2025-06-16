@@ -1,47 +1,29 @@
-import { loginWithPassword, loginWithDiscord } from './supabase.js'
+import { loginWithDiscord, handleDiscordCallback } from './supabase.js'
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm')
-    const discordLoginBtn = document.getElementById('discordLogin')
-    const errorMessage = document.getElementById('errorMessage')
-    
-    // ล็อกอินด้วย username/password
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        
-        const username = document.getElementById('username').value
-        const password = document.getElementById('password').value
-        
-        try {
-            await loginWithPassword(username, password)
-            window.location.href = '/dashboard.html'
-        } catch (error) {
-            errorMessage.textContent = error.message
-        }
-    })
-    
-    // ล็อกอินด้วย Discord
-    discordLoginBtn.addEventListener('click', async () => {
-        try {
-            await loginWithDiscord()
-        } catch (error) {
-            errorMessage.textContent = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบด้วย Discord'
-        }
-    })
-    // เมื่อสร้างผู้ใช้ใหม่
-    async function createUser(username, password) {
-      const { data, error } = await supabase
-        .from('users')
-        .insert([
-          {
-            username: username,
-            password_hash: hashPassword(password)
-            // ไม่ต้องระบุ id เพราะจะสร้างอัตโนมัติจาก DEFAULT
-          }
-        ])
-        .select();
-        
-      if (error) throw error;
-      return data[0];
+document.addEventListener('DOMContentLoaded', async () => {
+  // ตรวจสอบว่าอยู่ในหน้า callback หรือไม่
+  if (window.location.pathname === '/auth/discord/callback') {
+    const user = await handleDiscordCallback()
+    if (user) {
+      localStorage.setItem('election_user', JSON.stringify(user))
+      window.location.href = '/dashboard.html'
+    } else {
+      window.location.href = '/login.html?error=discord_oauth_failed'
     }
+    return
+  }
+
+  // ส่วนการจัดการฟอร์มล็อกอินปกติ
+  const loginForm = document.getElementById('loginForm')
+  const discordLoginBtn = document.getElementById('discordLogin')
+  const errorMessage = document.getElementById('errorMessage')
+  
+  if (discordLoginBtn) {
+    discordLoginBtn.addEventListener('click', (e) => {
+      e.preventDefault()
+      loginWithDiscord()
+    })
+  }
+  
+  // ... โค้ดการล็อกอินแบบปกติ ...
 })
