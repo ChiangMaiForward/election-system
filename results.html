@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ผลการเลือกตั้ง - ระบบเลือกตั้งออนไลน์</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>ระบบเลือกตั้งออนไลน์</h1>
+        <nav>
+            <a href="./index.html">หน้าแรก</a>
+            <a href="./dashboard.html">แดชบอร์ด</a>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>ผลการเลือกตั้ง</h2>
+        
+        <div id="resultsContainer">
+            <!-- ผลลัพธ์จะถูกโหลดโดย JavaScript -->
+        </div>
+        
+        <div id="resultsClosed">
+            <p>ผลการเลือกตั้งยังไม่เปิดให้ดู</p>
+        </div>
+    </main>
+    
+    <script src="./assets/js/supabase.js" type="module"></script>
+    <script src="./assets/js/results.js" type="module"></script>
+</body>
+</html>
