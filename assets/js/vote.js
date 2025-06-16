@@ -95,21 +95,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         })
     })
+    // เมื่อเพิ่ม vote ใหม่
+    async function addVote(userId, candidateId) {
+      const { data, error } = await supabase
+        .from('votes')
+        .insert([
+          { 
+            user_id: userId, // ใช้ UUID ที่มีอยู่
+            candidate_id: candidateId // ใช้ UUID ที่มีอยู่
+            // ไม่ต้องระบุ id เพราะจะสร้างอัตโนมัติจาก DEFAULT
+          }
+        ])
+        .select(); // เพื่อรับข้อมูลที่เพิ่งสร้าง
+        
+      if (error) throw error;
+      return data[0];
+    }
 })
 
-// เมื่อเพิ่ม vote ใหม่
-async function addVote(userId, candidateId) {
-  const { data, error } = await supabase
-    .from('votes')
-    .insert([
-      { 
-        user_id: userId, // ใช้ UUID ที่มีอยู่
-        candidate_id: candidateId // ใช้ UUID ที่มีอยู่
-        // ไม่ต้องระบุ id เพราะจะสร้างอัตโนมัติจาก DEFAULT
-      }
-    ])
-    .select(); // เพื่อรับข้อมูลที่เพิ่งสร้าง
-    
-  if (error) throw error;
-  return data[0];
-}
+
