@@ -28,4 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage.textContent = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบด้วย Discord'
         }
     })
+    // เมื่อสร้างผู้ใช้ใหม่
+    async function createUser(username, password) {
+      const { data, error } = await supabase
+        .from('users')
+        .insert([
+          {
+            username: username,
+            password_hash: hashPassword(password)
+            // ไม่ต้องระบุ id เพราะจะสร้างอัตโนมัติจาก DEFAULT
+          }
+        ])
+        .select();
+        
+      if (error) throw error;
+      return data[0];
+    }
 })
