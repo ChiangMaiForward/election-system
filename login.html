@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ - ระบบเลือกตั้งออนไลน์</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>ระบบเลือกตั้งออนไลน์</h1>
+    </header>
+    
+    <main class="login-container">
+        <div class="login-box">
+            <h2>เข้าสู่ระบบ</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">ชื่อผู้ใช้:</label>
+                    <input type="text" id="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">รหัสผ่าน:</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <button type="submit">เข้าสู่ระบบ</button>
+            </form>
+            
+            <div class="divider">หรือ</div>
+            
+            <button id="discordLogin" class="discord-btn">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">
+                เข้าสู่ระบบด้วย Discord
+            </button>
+            
+            <p class="error-message" id="errorMessage"></p>
+        </div>
+    </main>
+    
+    <script src="./assets/js/supabase.js" type="module"></script>
+    <script src="./assets/js/auth.js" type="module"></script>
+</body>
+</html>
